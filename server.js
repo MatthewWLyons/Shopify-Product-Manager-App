@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 // Use Routes
 app.use("/api", users);
+app.use("*", (req, res, next) => {});
 
 const port = process.env.PORT || 5000;
 
