@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "@shopify/polaris/styles.css";
 
 import AddProduct from "./components/AddProduct";
+import EditProduct from "./components/EditProduct";
 import ViewProducts from "./components/ViewProducts";
 
 class App extends Component {
@@ -18,6 +19,9 @@ class App extends Component {
             </Route>
             <Route exact path="/add">
               <AddProduct />
+            </Route>
+            <Route exact path="/edit/:productId" location={this.props.location}>
+              <EditProduct />
             </Route>
           </Switch>
         </Router>

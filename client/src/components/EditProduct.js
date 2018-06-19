@@ -3,9 +3,10 @@ import axios from "axios";
 import { Card, Page, FormLayout, TextField, Button } from "@shopify/polaris";
 
 class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      productId: "",
       title: "",
       type: "",
       price: "",
@@ -17,6 +18,23 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    var pageURL = window.location.href;
+    var lastURLSegment = pageURL.substr(pageURL.lastIndexOf("/") + 1);
+    this.setState({ productId: lastURLSegment });
+    const ReqUrl = "/api/product/" + lastURLSegment;
+    axios.get(ReqUrl).then(res => {
+      const product = res.data;
+      this.setState({
+        title: product.title,
+        type: product.product_type,
+        price: product.variants[0].price,
+        compareAt: product.variants[0].compare_at_price,
+        description: product.body_html
+      });
+    });
+  }
+
   handleInputChange(field) {
     return value => this.setState({ [field]: value });
   }
@@ -24,7 +42,10 @@ class Register extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const newUser = {
+    const PutUrl = "/api/update/";
+
+    const product = {
+      id: this.state.productId,
       title: this.state.title,
       type: this.state.type,
       price: this.state.price,
@@ -32,15 +53,16 @@ class Register extends Component {
       description: this.state.description
     };
 
-    axios.post("/api/register", newUser);
-    alert("Product Added");
+    axios.post(PutUrl, product);
+
+    alert("Product Updated");
     window.location = "/";
   }
 
   render() {
     return (
       <Page
-        title="Add a Product"
+        title="Edit Product"
         breadcrumbs={[
           {
             content: "View All",
@@ -97,7 +119,7 @@ class Register extends Component {
               />
             </FormLayout.Group>
             <FormLayout.Group>
-              <Button submit>Submit</Button>
+              <Button submit>Update</Button>
             </FormLayout.Group>
           </form>
         </Card>

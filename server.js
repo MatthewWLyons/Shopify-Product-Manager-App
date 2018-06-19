@@ -5,8 +5,11 @@ const users = require("./routes/users");
 
 const app = express();
 
-app.use(express.static("client/build"));
-app.use("/add", express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.use("/add", express.static("client/build"));
+  app.use("/edit/*", express.static("client/build"));
+}
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

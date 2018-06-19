@@ -34,6 +34,7 @@ class ResourceListExample extends Component {
                 items={this.state.products}
                 renderItem={item => {
                   const { id, title, price } = item;
+                  const url = "/edit/" + item.id;
                   const handle =
                     "https://lyons-teststore.myshopify.com/products/" +
                     item.handle;
@@ -48,6 +49,7 @@ class ResourceListExample extends Component {
                       accessibilityLabel={`View details for ${title}`}
                       shortcutActions={shortcutActions}
                       persistActions
+                      url={url}
                     >
                       <h3>
                         <TextStyle variation="strong">{title}</TextStyle>
