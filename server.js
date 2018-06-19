@@ -6,6 +6,7 @@ const users = require("./routes/users");
 const app = express();
 
 app.use(express.static("client/build"));
+app.use("/add", express.static("client/build"));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
