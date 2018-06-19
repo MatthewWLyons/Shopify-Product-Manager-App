@@ -1,5 +1,5 @@
 {
-  "name": "ShopifyManager",
+  "name": "shopifymanager",
   "version": "2.0.0",
   "description": "Works with Shopify Api to add and edit products in the Lyons Test Store",
   "main": "server.js",
