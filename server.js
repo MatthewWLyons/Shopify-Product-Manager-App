@@ -5,13 +5,14 @@ const users = require("./routes/users");
 
 const app = express();
 
+app.use(express.static("client/build"));
+
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Use Routes
 app.use("/api", users);
-app.use("*", (req, res, next) => {});
 
 const port = process.env.PORT || 5000;
 
