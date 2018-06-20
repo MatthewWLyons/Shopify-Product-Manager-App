@@ -1,7 +1,7 @@
 {
   "name": "shopifymanager",
   "version": "2.0.0",
-  "description": "Works with Shopify Api to add and edit products in the Lyons Test Store",
+  "description": "Works with Shopify Api to add and edit products in the shopfy Store",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
